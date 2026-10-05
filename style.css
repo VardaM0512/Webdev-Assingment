@@ -1,0 +1,369 @@
+/* =========================================
+   1. COLOUR VARIABLES (change colours here)
+   ========================================= */
+:root {
+  --pink: #ff8fc7;
+  --hot-pink: #ff4fa3;
+  --lilac: #c9a7ff;
+  --baby-blue: #9fe3ff;
+  --mint: #b8ffe0;
+  --text: #3d2a4f;
+  --card-bg: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================================
+   2. BASIC RESET + PAGE SETUP
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;          /* smooth scrolling when clicking nav links */
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+  /* moving pastel gradient background */
+  background: linear-gradient(-45deg, #ffe3f1, #f1e4ff, #e2f6ff, #fff0f7);
+  background-size: 400% 400%;
+  animation: bgMove 15s ease infinite;
+  overflow-x: hidden;
+}
+
+@keyframes bgMove {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* =========================================
+   3. FLOATING BLOBS (background decoration)
+   ========================================= */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  z-index: -1;
+  animation: float 10s ease-in-out infinite;
+}
+.blob1 { width: 300px; height: 300px; background: var(--pink);      top: -60px;  left: -80px; }
+.blob2 { width: 250px; height: 250px; background: var(--lilac);     top: 40%;    right: -70px; animation-delay: 3s; }
+.blob3 { width: 220px; height: 220px; background: var(--baby-blue); bottom: -60px; left: 30%; animation-delay: 6s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-40px) scale(1.1); }
+}
+
+/* =========================================
+   4. NAVIGATION BAR
+   ========================================= */
+.navbar {
+  position: sticky;                 /* stays on top while scrolling */
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px 8%;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);      /* frosted-glass effect */
+  border-bottom: 2px solid rgba(255, 143, 199, 0.4);
+}
+
+.logo {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--hot-pink);
+  text-decoration: none;
+}
+.logo span { color: var(--lilac); }
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  position: relative;
+}
+/* underline that grows on hover */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--hot-pink), var(--lilac));
+  transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* =========================================
+   5. HERO SECTION (photo + name)
+   ========================================= */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding: 70px 8% 50px;
+  flex-wrap: wrap;
+}
+
+/* spinning rainbow ring around the photo, like an Insta story */
+.photo-ring {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  padding: 7px;
+  background: conic-gradient(var(--hot-pink), var(--lilac), var(--baby-blue), var(--mint), var(--hot-pink));
+  animation: spin 6s linear infinite;
+  box-shadow: 0 0 40px rgba(255, 79, 163, 0.45);
+}
+.photo-ring img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  animation: spin 6s linear infinite reverse;   /* keeps the photo itself upright */
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.hero-text { max-width: 520px; }
+
+.hello {
+  font-family: 'Space Mono', monospace;
+  color: var(--hot-pink);
+  font-size: 1.1rem;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin: 8px 0 15px;
+}
+
+/* animated gradient text for the name */
+.gradient-text {
+  background: linear-gradient(90deg, var(--hot-pink), var(--lilac), #5ec8f2, var(--hot-pink));
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 5s linear infinite;
+}
+@keyframes shine {
+  to { background-position: 300% center; }
+}
+
+.intro { font-size: 1.1rem; margin-bottom: 18px; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+.tags span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: white;
+  border: 2px dashed var(--pink);
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 30px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  background: linear-gradient(90deg, var(--hot-pink), var(--lilac));
+  box-shadow: 0 6px 20px rgba(255, 79, 163, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(255, 79, 163, 0.6);
+}
+
+/* =========================================
+   6. CARDS (each section is a card)
+   ========================================= */
+main {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 0 5% 40px;
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 2px solid white;
+  border-radius: 25px;
+  padding: 35px;
+  margin-bottom: 35px;
+  box-shadow: 0 8px 30px rgba(201, 167, 255, 0.3);
+  animation: fadeUp 1s ease both;
+  transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-5px); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 18px;
+  display: inline-block;
+  border-bottom: 4px solid var(--pink);
+}
+.card h3 { font-size: 1.1rem; margin: 18px 0 10px; }
+.card p  { margin-bottom: 12px; }
+.card strong { color: var(--hot-pink); }
+
+/* ---- Education timeline ---- */
+.timeline {
+  border-left: 4px solid var(--lilac);
+  padding-left: 25px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+/* little dot on the timeline line */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: 22px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--hot-pink);
+  border: 3px solid white;
+}
+.place { font-weight: 600; }
+.date {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: #8a6aa8;
+}
+
+/* ---- Skill chips ---- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chips span {
+  padding: 7px 16px;
+  border-radius: 20px;
+  background: white;
+  border: 2px solid var(--baby-blue);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  cursor: default;
+}
+.chips span:hover {
+  background: linear-gradient(90deg, var(--pink), var(--lilac));
+  color: white;
+  border-color: transparent;
+  transform: scale(1.1) rotate(-2deg);
+}
+
+/* ---- Hobby boxes ---- */
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.hobby {
+  background: white;
+  border-radius: 20px;
+  padding: 22px;
+  text-align: center;
+  border: 2px solid var(--mint);
+  transition: transform 0.3s;
+}
+.hobby:hover { transform: translateY(-8px) rotate(1deg); }
+.emoji {
+  font-size: 2.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* ---- Contact buttons ---- */
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.contact-btn {
+  flex: 1 1 260px;
+  white-space: nowrap;
+  text-align: center;
+  padding: 14px;
+  border-radius: 18px;
+  background: white;
+  border: 2px solid var(--pink);
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.contact-btn:hover {
+  background: var(--hot-pink);
+  color: white;
+  box-shadow: 0 0 20px var(--pink);
+}
+
+/* =========================================
+   7. FOOTER
+   ========================================= */
+footer {
+  text-align: center;
+  padding: 25px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+}
+
+/* =========================================
+   8. RESPONSIVE (phones & small screens)
+   ========================================= */
+@media (max-width: 700px) {
+  .navbar { justify-content: center; padding: 12px 5%; }
+  .nav-links { gap: 14px; justify-content: center; font-size: 0.9rem; }
+  .hero { gap: 30px; padding-top: 40px; text-align: center; }
+  .photo-ring { width: 200px; height: 200px; }
+  .hero-text h1 { font-size: 2.2rem; }
+  .tags { justify-content: center; }
+  .card { padding: 25px; }
+}
